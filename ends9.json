@@ -1,0 +1,128 @@
+[
+  {
+    "id": 40725,
+    "position": 1,
+    "audio_url": "wbw/070_039_001.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "كَلَّآ ۖ",
+    "text_qpc_hafs": "كـَلَّآۖ",
+    "code_v2": "ﳡﳢ",
+    "code_v1": "ﰒﰓ",
+    "line_number": 14,
+    "page_number": 569,
+    "text": "ﳡﳢ",
+    "translation": {
+      "text": "By no means",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "kallā",
+      "language_name": "english"
+    }
+  },
+  {
+    "id": 40727,
+    "position": 2,
+    "audio_url": "wbw/070_039_003.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "إِنَّا",
+    "text_qpc_hafs": "إِنَّا",
+    "code_v2": "ﳣ",
+    "code_v1": "ﰔ",
+    "line_number": 14,
+    "page_number": 569,
+    "text": "ﳣ",
+    "translation": {
+      "text": "Indeed, We",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "innā",
+      "language_name": "english"
+    }
+  },
+  {
+    "id": 40728,
+    "position": 3,
+    "audio_url": "wbw/070_039_004.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "خَلَقْنَـٰهُم",
+    "text_qpc_hafs": "خَلَقۡنَٰهُم",
+    "code_v2": "ﳤ",
+    "code_v1": "ﰕ",
+    "line_number": 14,
+    "page_number": 569,
+    "text": "ﳤ",
+    "translation": {
+      "text": "[We] have created them",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "khalaqnāhum",
+      "language_name": "english"
+    }
+  },
+  {
+    "id": 40729,
+    "position": 4,
+    "audio_url": "wbw/070_039_005.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "مِّمَّا",
+    "text_qpc_hafs": "مِّمَّا",
+    "code_v2": "ﳥ",
+    "code_v1": "ﰖ",
+    "line_number": 15,
+    "page_number": 569,
+    "text": "ﳥ",
+    "translation": {
+      "text": "from what",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "mimmā",
+      "language_name": "english"
+    }
+  },
+  {
+    "id": 40730,
+    "position": 5,
+    "audio_url": "wbw/070_039_006.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "يَعْلَمُونَ",
+    "text_qpc_hafs": "يَعۡلَمُونَ",
+    "code_v2": "ﳦ",
+    "code_v1": "ﰗ",
+    "line_number": 15,
+    "page_number": 569,
+    "text": "ﳦ",
+    "translation": {
+      "text": "they know",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "yaʿlamūna",
+      "language_name": "english"
+    }
+  },
+  {
+    "id": 40731,
+    "position": 6,
+    "audio_url": null,
+    "char_type_name": "end",
+    "text_uthmani": "٣٩",
+    "text_qpc_hafs": "٣٩",
+    "code_v2": "ﳧ",
+    "code_v1": "ﰘ",
+    "line_number": 15,
+    "page_number": 569,
+    "text": "ﳧ",
+    "translation": {
+      "text": "(39)",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": null,
+      "language_name": "english"
+    }
+  }
+]

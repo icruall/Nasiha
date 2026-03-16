@@ -1,0 +1,23 @@
+[
+  {
+    "id": 22124,
+    "position": 1,
+    "audio_url": "wbw/070_019_002.mp3",
+    "char_type_name": "word",
+    "verse_key": "70:19",
+    "line_number": 4,
+    "code_v2": "ﱪ ﱫ",
+    "text_qpc_hafs": "۞ إِنَّ",
+    "text_uthmani": "۞ إِنَّ",
+    "page_number": 569,
+    "text": "ﱪ ﱫ",
+    "translation": {
+      "text": "Indeed",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "inna",
+      "language_name": "english"
+    }
+  }
+]

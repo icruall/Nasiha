@@ -1,0 +1,86 @@
+[
+  {
+    "id": 12843,
+    "position": 1,
+    "audio_url": "wbw/070_011_001.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "يُبَصَّرُونَهُمْ ۚ",
+    "text_qpc_hafs": "يُبَصَّرُونَهُمۡۚ",
+    "code_v2": "ﱁﱂ",
+    "code_v1": "ﭑﭒ",
+    "line_number": 1,
+    "page_number": 569,
+    "text": "ﱁﱂ",
+    "translation": {
+      "text": "They will be made to see each other",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "yubaṣṣarūnahum",
+      "language_name": "english"
+    }
+  },
+  {
+    "id": 17440,
+    "position": 1,
+    "audio_url": "wbw/070_015_001.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "كَلَّآ ۖ",
+    "text_qpc_hafs": "كـَلَّآۖ",
+    "code_v2": "ﱚﱛ",
+    "code_v1": "ﭪﭫ",
+    "line_number": 3,
+    "page_number": 569,
+    "text": "ﱚﱛ",
+    "translation": {
+      "text": "By no means",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "kallā",
+      "language_name": "english"
+    }
+  },
+  {
+    "id": 22124,
+    "position": 1,
+    "audio_url": "wbw/070_019_002.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "۞ إِنَّ",
+    "text_qpc_hafs": "۞ إِنَّ",
+    "code_v2": "ﱪ ﱫ",
+    "code_v1": "ﭺ ﭻ",
+    "line_number": 4,
+    "page_number": 569,
+    "text": "ﱪ ﱫ",
+    "translation": {
+      "text": "Indeed",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "inna",
+      "language_name": "english"
+    }
+  },
+  {
+    "id": 40725,
+    "position": 1,
+    "audio_url": "wbw/070_039_001.mp3",
+    "char_type_name": "word",
+    "text_uthmani": "كَلَّآ ۖ",
+    "text_qpc_hafs": "كـَلَّآۖ",
+    "code_v2": "ﳡﳢ",
+    "code_v1": "ﰒﰓ",
+    "line_number": 14,
+    "page_number": 569,
+    "text": "ﳡﳢ",
+    "translation": {
+      "text": "By no means",
+      "language_name": "english"
+    },
+    "transliteration": {
+      "text": "kallā",
+      "language_name": "english"
+    }
+  }
+]
