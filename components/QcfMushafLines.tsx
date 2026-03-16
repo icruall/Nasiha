@@ -67,13 +67,54 @@ export function QcfMushafLines({
       />
 
       <div className="qcf-lines">
-        {lines.map(([lineNumber, words]) => {
+        {lines.map(([lineNumber, words], index) => {
           // Check if this line contains the first word of the first verse of a surah
           const firstVerseWord = words.find((w) => w.verse_key?.endsWith(":1") && w.position === 1);
           const chapterId = firstVerseWord
             ? Number.parseInt(firstVerseWord.verse_key.split(":")[0], 10)
             : null;
           const chapter = chapterId ? chapterById.get(chapterId) : null;
+
+          const lastWord = words[words.length - 1];
+          const currentVk = lastWord?.verse_key;
+          const currentChapterId = currentVk ? Number.parseInt(currentVk.split(":")[0], 10) : null;
+          
+          // Check if the next line starts a new surah
+          const nextLineChapterId = (() => {
+            const nextLineWords = lines[index + 1]?.[1];
+            const nextFirstWord = nextLineWords?.[0];
+            const nextVk = nextFirstWord?.verse_key;
+            return nextVk ? Number.parseInt(nextVk.split(":")[0], 10) : null;
+          })();
+
+          const isLastAyahSparse = (() => {
+            if (words.length >= 4) return false;
+            const vk = words[0]?.verse_key;
+            if (!vk) return false;
+            const [cId, vNum] = vk.split(":").map(Number);
+            const chaptersCount = chapterById.get(cId)?.verses_count;
+            return vNum === chaptersCount;
+          })();
+
+          const isShortSurah = (() => {
+            const vk = words[0]?.verse_key;
+            if (!vk) return false;
+            const cId = Number.parseInt(vk.split(":")[0], 10);
+            const count = chapterById.get(cId)?.verses_count;
+            return count !== undefined && count <= 10;
+          })();
+
+          const isLastLineOfSurah = 
+            isShortSurah ||
+            isLastAyahSparse ||
+            (currentChapterId && nextLineChapterId && currentChapterId !== nextLineChapterId) ||
+            (lastWord?.char_type_name === "end" && (() => {
+              const vk = lastWord.verse_key;
+              if (!vk) return false;
+              const [cId, vNum] = vk.split(":").map(Number);
+              const chaptersCount = chapterById.get(cId)?.verses_count;
+              return vNum === chaptersCount;
+            })());
 
           return (
             <div key={`${pageNumber}-${lineNumber}`} className="contents">
@@ -87,7 +128,7 @@ export function QcfMushafLines({
                   )}
                 </div>
               )}
-              <div className="qcf-line">
+              <div className={`qcf-line ${isLastLineOfSurah ? "is-last-line" : ""}`}>
                 {words.map((w) => {
                   const isEnd = w.char_type_name === "end";
                   if (isEnd) {

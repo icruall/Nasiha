@@ -38,9 +38,43 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                                 <Bismillah />
                             </div>
                         )}
-                        {Array.from(linesMap.entries()).sort((a, b) => a[0] - b[0]).map(([lineNumber, words]) => {
+                        {Array.from(linesMap.entries()).sort((a, b) => a[0] - b[0]).map(([lineNumber, words], index, allLines) => {
+                            const lastWord = words[words.length - 1];
+                            const currentVk = lastWord?.verse_key;
+                            const currentChapterId = currentVk ? Number.parseInt(currentVk.split(":")[0], 10) : null;
+
+                            // Check if next line (in this page or next) starts a new surah
+                            // In MushafView, 'verses' is for one surah usually, but let's be safe.
+                            const isLastLineOfSurah = (() => {
+                                // 1. Direct check: is it the last word of the surah?
+                                if (lastWord?.char_type_name === "end") {
+                                    const vk = lastWord.verse_key;
+                                    if (vk) {
+                                        const [cId, vNum] = vk.split(":").map(Number);
+                                        if (vNum === chapter.verses_count) return true;
+                                    }
+                                }
+                                // 2. Contextual check: is it the last line of this view?
+                                if (index === allLines.length - 1) {
+                                    // If it's the last line of the last page, it's definitely the end of the surat.
+                                    const allPages = Array.from(pages.keys()).sort((a, b) => a - b);
+                                    if (page === allPages[allPages.length - 1]) return true;
+                                }
+                                // 3. Sparse check (similar to QcfMushafLines)
+                                if (words.length < 5) {
+                                    const vk = words[0]?.verse_key;
+                                    if (vk) {
+                                        const [cId, vNum] = vk.split(":").map(Number);
+                                        if (vNum === chapter.verses_count) return true;
+                                    }
+                                }
+                                return false;
+                            })();
+
+                            const isShortSurah = (chapter.verses_count || 0) <= 10;
+
                             const isShortLine = words.length < 5;
-                            let justify = (isCenteredPage || isShortLine) ? "justify-center gap-[0.5em] sm:gap-[0.7em]" : "justify-between";
+                            let justify = (isCenteredPage || isShortLine || isLastLineOfSurah || isShortSurah) ? "justify-center gap-[0.5em] sm:gap-[0.7em]" : "justify-between";
                             let lineClasses = `flex w-full items-center ${justify}`;
 
                             return (

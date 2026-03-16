@@ -100,9 +100,17 @@ body {
   color: #1a1a1a !important;
 }
 
-/* Prevent last line from stretching like printed mushaf */
-.qcf-line:last-child {
-  text-align: right;
+/* Prevent last line of surah or page from stretching */
+.qcf-line.is-last-line {
+  text-align: center !important;
+  text-justify: none !important;
+  text-align-last: center !important;
+}
+
+.qcf-lines > .contents:last-child .qcf-line:not(.is-last-line) {
+  text-align: right !important;
+  text-justify: none !important;
+  text-align-last: right !important;
 }
 
 
