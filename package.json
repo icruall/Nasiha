@@ -2,32 +2,45 @@
   "name": "nasiha-web",
   "version": "0.1.0",
   "private": true,
-
   "overrides": {
     "tmp": "^0.2.4"
   },
-  
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "sanity:dev": "sanity dev",
+    "sanity:build": "sanity build",
+    "sanity:deploy": "sanity deploy",
+    "sanity:graphql": "sanity graphql deploy"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.2",
     "@sanity/client": "^7.15.0",
-    "next": "16.1.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "@sanity/vision": "^5.9.0",
+    "next": "15.1.6",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "sanity": "^3.71.1",
+    "styled-components": "^6.1.18"
   },
   "devDependencies": {
+    "@sanity/eslint-config-studio": "^6.0.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^4.1.1",
-    "eslint-config-next": "^0.2.4",
+    "eslint": "^9.20.0",
+    "eslint-config-next": "15.1.0",
+    "prettier": "^3.5.1",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
   }
 }
