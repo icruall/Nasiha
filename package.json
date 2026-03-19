@@ -22,7 +22,7 @@
     "next": "15.1.6",
     "react": "^19.2.2",
     "react-dom": "^19.2.2",
-    "sanity": "^3.71.1",
+    "sanity": "^5.0.0",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {
