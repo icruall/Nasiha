@@ -1,42 +1,69 @@
-# Nasiha
+# 📖 Nasiha
+Nasiha is a calm, reflective Islamic website designed to help users reconnect with the Qur’an through emotions, reflection, and duʿā’.
 
-This project combines a [Next.js](https://nextjs.org) frontend with [Sanity Studio](https://www.sanity.io).
+It combines a modern Next.js frontend with structured content and a Tajweed-enabled Qur’an reader.
 
-## Project Structure
+# ✨ Features
+# 🌙 Emotion-based guidance
 
-- **Next.js App**: Located in the root (using the `/app` directory).
-- **Sanity Studio**: Configuration and schemas are integrated into the root.
+Explore feelings like sadness, anxiety, laziness
 
-## Getting Started
+Each emotion includes relevant Qur’an ayat and duʿā’
 
-### 1. Install Dependencies
-```bash
-npm install
-```
+# 📖 Qur’an reader
 
-### 2. Run the Development Servers
+Surah and Mushaf view
 
-**Next.js (Website):**
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) to see the result.
+Tajweed highlighting
 
-**Sanity (Studio):**
-**Sanity (Studio):**
-```bash
-npm run sanity:dev
-```
-Open [http://localhost:3333](http://localhost:3333) to access the Content Studio.
+Ayah navigation and linking
 
-## Scripts
+🔗 Smart navigation
 
-- `npm run dev`: Start Next.js in development mode.
-- `npm run build`: Build Next.js for production.
-- `npm run sanity:dev`: Start Sanity Studio locally.
-- `npm run sanity:build`: Build Sanity Studio for production.
+Click an ayah → opens exact location in Qur’an reader
 
-## Learn More
+Highlighted verse for better focus
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Sanity Documentation](https://www.sanity.io/docs)
+# 🎨 Clean Islamic UI
+
+Minimal, distraction-free design
+
+Uthmanic Arabic typography
+
+# 🏗️ Tech Stack
+Frontend: Next.js (App Router)
+
+Styling: Tailwind CSS
+
+Content (optional): Sanity Studio
+
+Qur’an Data: Quran.com API
+
+Fonts: QCF + Uthmanic Hafs
+
+# 📁 Project Structure
+app/            → Next.js routes
+components/     → UI components
+lib/            → API + helpers
+public/         → static assets
+
+# 🎯 Vision
+Nasiha aims to be:
+
+a space for reflection
+
+a bridge between emotions and Qur’an
+
+a simple, beautiful Islamic experience
+
+# 🤝 Contributing
+Contributions, ideas, and feedback are welcome.
+
+📌 Future Improvements (ان شاء الله)
+Audio recitation
+
+Tafsir integration
+
+Bookmarking ayat
+
+Personal reflection journaling
