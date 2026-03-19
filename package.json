@@ -19,7 +19,7 @@
     "@portabletext/react": "^6.0.2",
     "@sanity/client": "^7.15.0",
     "@sanity/vision": "^5.9.0",
-    "next": "15.1.6",
+    "next": "^15.5.14",
     "react": "^19.2.2",
     "react-dom": "^19.2.2",
     "sanity": "^5.0.0",
@@ -32,7 +32,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^15.1.0",
+    "eslint-config-next": "^15.5.14",
     "prettier": "^3.5.1",
     "tailwindcss": "^4",
     "typescript": "^5"
