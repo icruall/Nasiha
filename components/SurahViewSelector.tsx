@@ -11,7 +11,9 @@ export function SurahViewSelector({ verses, chapter }: { verses: ChapterVerseWit
 
     useEffect(() => {
         if (window.location.hash.startsWith('#ayah-')) {
-            setMode("translation");
+            requestAnimationFrame(() => {
+                setMode("translation");
+            });
         }
     }, []);
 

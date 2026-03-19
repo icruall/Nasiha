@@ -2,8 +2,6 @@ import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { fetchChapters, fetchMushafPageWords } from '@/lib/quranCom'
 import { QcfMushafLines } from '@/components/QcfMushafLines'
-import { Bismillah } from '@/components/Bismillah'
-import { SurahHeader } from '@/components/SurahHeader'
 
 function clampChapter(chapter: number) {
   if (Number.isNaN(chapter) || chapter < 1 || chapter > 114) return null
@@ -17,13 +15,10 @@ function clampPage(page: number) {
 
 export default async function SurahMushafPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ chapterNumber: string; pageNumber: string }>
-  searchParams?: Promise<{ tajweed?: string }>
 }) {
   const { chapterNumber, pageNumber } = await params
-  const sp = (await searchParams) ?? {}
 
   const chapter = clampChapter(Number.parseInt(chapterNumber, 10))
   const page = clampPage(Number.parseInt(pageNumber, 10))

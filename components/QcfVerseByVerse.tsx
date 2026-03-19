@@ -135,8 +135,8 @@ function QcfVerse(props: {
                   className="qcf-word"
                   style={
                     tajweedColors
-                      ? ({ fontFamily: `${fam}, serif`, fontPalette: "--qcf-tajweed", fontSize: "clamp(26px, 3.0vw, 42px)" } as any)
-                      : ({ fontFamily: `${fam}, serif`, fontSize: "clamp(26px, 3.0vw, 42px)" } as any)
+                      ? { fontFamily: `${fam}, serif`, fontPalette: "--qcf-tajweed", fontSize: "clamp(26px, 3.0vw, 42px)" } as React.CSSProperties
+                      : { fontFamily: `${fam}, serif`, fontSize: "clamp(26px, 3.0vw, 42px)" } as React.CSSProperties
                   }
                   dangerouslySetInnerHTML={{ __html: code }}
                 />

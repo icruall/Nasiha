@@ -40,17 +40,12 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                         )}
                         {Array.from(linesMap.entries()).sort((a, b) => a[0] - b[0]).map(([lineNumber, words], index, allLines) => {
                             const lastWord = words[words.length - 1];
-                            const currentVk = lastWord?.verse_key;
-                            const currentChapterId = currentVk ? Number.parseInt(currentVk.split(":")[0], 10) : null;
-
-                            // Check if next line (in this page or next) starts a new surah
-                            // In MushafView, 'verses' is for one surah usually, but let's be safe.
                             const isLastLineOfSurah = (() => {
                                 // 1. Direct check: is it the last word of the surah?
                                 if (lastWord?.char_type_name === "end") {
                                     const vk = lastWord.verse_key;
                                     if (vk) {
-                                        const [cId, vNum] = vk.split(":").map(Number);
+                                        const [, vNum] = vk.split(":").map(Number);
                                         if (vNum === chapter.verses_count) return true;
                                     }
                                 }
@@ -64,7 +59,7 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                                 if (words.length < 5) {
                                     const vk = words[0]?.verse_key;
                                     if (vk) {
-                                        const [cId, vNum] = vk.split(":").map(Number);
+                                        const [, vNum] = vk.split(":").map(Number);
                                         if (vNum === chapter.verses_count) return true;
                                     }
                                 }
@@ -74,8 +69,8 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                             const isShortSurah = (chapter.verses_count || 0) <= 10;
 
                             const isShortLine = words.length < 5;
-                            let justify = (isCenteredPage || isShortLine || isLastLineOfSurah || isShortSurah) ? "justify-center gap-[0.5em] sm:gap-[0.7em]" : "justify-between";
-                            let lineClasses = `flex w-full items-center ${justify}`;
+                            const justify = (isCenteredPage || isShortLine || isLastLineOfSurah || isShortSurah) ? "justify-center gap-[0.5em] sm:gap-[0.7em]" : "justify-between";
+                            const lineClasses = `flex w-full items-center ${justify}`;
 
                             return (
                                 <div

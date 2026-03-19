@@ -2,7 +2,6 @@ import { fetchChapters, fetchVersesByChapterWithWords } from '@/lib/quranCom'
 import { notFound } from 'next/navigation'
 import { SurahDetailHeader } from '@/components/SurahDetailHeader'
 import { SurahViewSelector } from '@/components/SurahViewSelector'
-import { Bismillah } from '@/components/Bismillah'
 
 export default async function SurahReadingPage({
   params,

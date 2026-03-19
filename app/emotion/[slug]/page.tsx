@@ -1,5 +1,4 @@
 import { sanityClient } from '@/lib/sanity'
-import Card from '@/components/Card'
 import { emotionBySlugQuery } from '@/lib/queries'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -8,6 +7,19 @@ export const dynamic = 'force-dynamic'
 
 type Props = {
   params: Promise<{ slug?: string }>
+}
+
+interface QuranVerse {
+  arabic: string
+  translation: string
+  reference?: string
+}
+
+interface DuaItem {
+  arabic?: string
+  translation: string
+  prophet?: string
+  canonicalSource?: string
 }
 
 export async function generateMetadata(
@@ -82,9 +94,9 @@ export default async function EmotionPage({ params }: Props) {
 
       {emotion.cards?.quran?.verses?.length > 0 && (
         <div className="space-y-8">
-          <p className="text-xs uppercase tracking-widest text-gray-400 text-center">Qur'an</p>
+          <p className="text-xs uppercase tracking-widest text-gray-400 text-center">Qur&apos;an</p>
           <div className="space-y-10">
-            {emotion.cards.quran.verses.map((v: any, i: number) => {
+            {emotion.cards.quran.verses.map((v: QuranVerse, i: number) => {
               // Robustly extract surah number and ayah number from strings like "Qur'an 9:105" or "13:11"
               const reference = v.reference || "";
               const matches = reference.match(/(\d+):(\d+)/);
@@ -135,9 +147,9 @@ export default async function EmotionPage({ params }: Props) {
       {/* Duʿā’ Section */}
       {emotion.cards?.dua?.duas?.length > 0 && (
         <div className="space-y-8">
-          <p className="text-xs uppercase tracking-widest text-gray-400 text-center">Duʿā’</p>
+          <p className="text-xs uppercase tracking-widest text-gray-400 text-center">Du&apos;ā&apos;</p>
           <div className="space-y-16">
-            {emotion.cards.dua.duas.map((d: any, i: number) => (
+            {emotion.cards.dua.duas.map((d: DuaItem, i: number) => (
               <div key={i} className="space-y-6">
                 {/* Arabic */}
                 {d.arabic && (

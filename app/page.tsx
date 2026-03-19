@@ -25,7 +25,7 @@ export default function Home() {
                   Emotions
                 </h3>
                 <p className="text-sm text-gray-200 leading-relaxed">
-                  Reflections, Qur'an and duʿā'.
+                  Reflections, Qur&apos;an and duʿā&apos;.
                 </p>
               </div>
             </Link>
@@ -41,7 +41,7 @@ export default function Home() {
             >
               <div className="space-y-3">
                 <h3 className="text-lg font-semibold">
-                  Qur'an
+                  Qur&apos;an
                 </h3>
                 <p className="text-sm leading-relaxed text-gray-200">
                   For reflection, comfort, and remembrance.

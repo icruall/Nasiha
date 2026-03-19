@@ -156,8 +156,8 @@ export function QcfMushafLines({
                       className="qcf-word"
                       style={
                         tajweedColors
-                          ? ({ fontFamily: `${fontFamily}, serif`, fontPalette: "--qcf-tajweed" } as any)
-                          : ({ fontFamily: `${fontFamily}, serif` } as any)
+                          ? { fontFamily: `${fontFamily}, serif`, fontPalette: "--qcf-tajweed" } as React.CSSProperties
+                          : { fontFamily: `${fontFamily}, serif` }
                       }
                       dangerouslySetInnerHTML={{ __html: code }}
                     />
