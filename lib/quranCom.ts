@@ -237,6 +237,8 @@ export type SearchResponse = {
   }
 }
 
+
+
 export async function searchQuran(query: string, options: { page?: number; size?: number } = {}): Promise<SearchResponse> {
   const { page = 1, size = 20 } = options
   const url = new URL(`${API_BASE}/search`)

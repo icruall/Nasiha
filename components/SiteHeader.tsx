@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import SurahIndexToggle from "./SurahIndexToggle";
 
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -53,6 +54,13 @@ export default function SiteHeader() {
             A calm, reflective space to sit with your emotions — through
             reflection, Qur&apos;an, duʿā&apos;, and hope.
           </p>
+        </div>
+
+        {/* Push to the right */}
+        <div className="sm:flex-1" />
+
+        <div className="flex items-center gap-4 self-end sm:self-center">
+          <SurahIndexToggle />
         </div>
       </div>
     </header>

@@ -78,8 +78,13 @@ function QcfVerse(props: {
   const translationHtml = verse.translations?.[0]?.text ?? "";
 
   return (
-    <div className="qcf-white-container mb-6 px-5 py-6 md:px-8">
+    <div className="py-8 px-5 sm:px-8 border-b border-gray-100 last:border-0 group">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex-none items-start mt-2">
+          <div className="flex items-center justify-center w-10 h-10 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-sm font-semibold text-emerald-400">
+            {verse.verse_number}
+          </div>
+        </div>
         <div className="flex-1 text-center sm:text-right">
           <div className="inline-flex flex-wrap justify-center items-center gap-[0.25rem]">
             {words.map((w: MushafWord) => {
@@ -105,8 +110,6 @@ function QcfVerse(props: {
               const fam = `qcf-p${w.page_number}-${tajweedColors ? "v4" : "v2"}`;
               const code = w.code_v2 ?? "";
 
-              // If we are using Tajweed colors, use the refined HTML with UthmanicHafs font
-              // This ensures character-level precision matching the MushafView and Translation mode.
               if (tajweedColors && tajweedHtml) {
                 return (
                   <span
@@ -119,8 +122,6 @@ function QcfVerse(props: {
                 );
               }
 
-              // Otherwise fallback to glyph-based rendering (PUA/Entities)
-              // Filter out gibberish font-test strings like "سهشمشهكلكملمنم" or plain text
               const isStandardArabicEntity = code.startsWith("&#") && (() => {
                 const num = parseInt(code.replace(/[^0-9]/g, ""), 10);
                 return num >= 1536 && num <= 1791; // 0x0600 - 0x06FF
@@ -144,7 +145,7 @@ function QcfVerse(props: {
           </div>
         </div>
 
-        <span className="shrink-0 self-end sm:self-start rounded-full border border-gray-100 bg-gray-50/50 px-2.5 py-1 text-xs font-medium text-gray-400">
+        <span className="shrink-0 self-end sm:self-start rounded-full border border-gray-100 bg-gray-50/50 px-2.5 py-1 text-xs font-medium text-gray-400 hidden sm:block">
           {verse.verse_key}
         </span>
       </div>

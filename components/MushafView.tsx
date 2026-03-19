@@ -31,7 +31,7 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                     <div
                         key={page}
                         className={`w-[min(100%,800px)] px-6 sm:px-12 rounded-[2rem] flex flex-col justify-center min-h-[600px] ${pageGap}`}
-                        style={{ backgroundColor: '#ffffff' }}
+                        style={{ backgroundColor: '#FFFFEE' }}
                     >
                         {isFirstPage && chapter.id !== 1 && chapter.id !== 9 && (
                             <div className="mb-8 mt-2 w-full flex justify-center">

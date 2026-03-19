@@ -34,6 +34,8 @@ export const metadata: Metadata = {
   },
 }
 
+import { QuranProvider } from "@/lib/quranContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -44,8 +46,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${amiri.variable} antialiased`}
       >
-        <SiteHeader />
-        {children}
+        <QuranProvider>
+          <SiteHeader />
+          {children}
+        </QuranProvider>
       </body>
     </html>
   );

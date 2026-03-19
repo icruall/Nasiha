@@ -86,7 +86,7 @@ body {
 }
 
 .qcf-white-container {
-  background-color: #fafaf9 !important;
+  background-color: #FFFFEE !important;
   color: #1a1a1a !important;
   border-radius: 1.5rem;
   border: 1px solid #e7e5e4 !important;
@@ -221,4 +221,22 @@ rule {
   background: rgba(186, 230, 253, 0.55) !important;
   border-top: 1px solid rgba(125, 211, 252, 0.4) !important;
   border-bottom: 1px solid rgba(125, 211, 252, 0.4) !important;
+}
+
+/* Sidebar Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.3);
 }
