@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   },
   description:
     'A calm, reflective space to sit with your emotions through reflection, Qur’an, duʿā’, and hope.',
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
   robots: {
     index: true,
     follow: true,
