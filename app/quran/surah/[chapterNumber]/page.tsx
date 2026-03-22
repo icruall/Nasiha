@@ -23,7 +23,7 @@ export default async function SurahReadingPage({
       <div className="w-full max-w-4xl flex flex-col items-center">
         <SurahDetailHeader chapter={ch} />
 
-        <SurahViewSelector chapter={ch} verses={verses} />
+        <SurahViewSelector chapter={ch} verses={verses} chapters={chapters} />
       </div>
     </main>
   )

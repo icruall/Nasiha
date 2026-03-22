@@ -6,7 +6,7 @@ import { TajweedVerseText } from "./TajweedVerseText";
 import { MushafView } from "./MushafView";
 import { Bismillah } from "./Bismillah";
 
-export function SurahViewSelector({ verses, chapter }: { verses: ChapterVerseWithWords[], chapter: QuranChapter }) {
+export function SurahViewSelector({ verses, chapter, chapters }: { verses: ChapterVerseWithWords[], chapter: QuranChapter, chapters: QuranChapter[] }) {
     const [mode, setMode] = useState<"translation" | "mushaf">("mushaf");
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export function SurahViewSelector({ verses, chapter }: { verses: ChapterVerseWit
                     ))}
                 </div>
             ) : (
-                <MushafView verses={verses} chapter={chapter} />
+                <MushafView verses={verses} chapter={chapter} chapters={chapters} />
             )}
         </div>
     );

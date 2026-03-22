@@ -2,8 +2,9 @@ import React from "react";
 import type { ChapterVerseWithWords, MushafWord, QuranChapter } from "@/lib/quranCom";
 import { Bismillah } from "./Bismillah";
 import { refineTajweed } from "@/lib/tajweed";
+import { SurahHeader } from "./SurahHeader";
 
-export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[], chapter: QuranChapter }) {
+export function MushafView({ verses, chapter, chapters }: { verses: ChapterVerseWithWords[], chapter: QuranChapter, chapters: QuranChapter[] }) {
     // Group words by page_number, then by line_number
     const pages = new Map<number, Map<number, MushafWord[]>>();
 
@@ -33,36 +34,35 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                         className={`w-[min(100%,800px)] px-2 sm:px-12 rounded-[2rem] flex flex-col justify-center min-h-[600px] ${pageGap}`}
                         style={{ backgroundColor: '#FFFFEE' }}
                     >
-                        {isFirstPage && chapter.id !== 1 && chapter.id !== 9 && (
-                            <div className="mb-8 mt-2 w-full flex justify-center">
-                                <Bismillah />
-                            </div>
-                        )}
+                        {/* Surah Headers and Bismillah are now handled dynamically per line below */}
                         {Array.from(linesMap.entries()).sort((a, b) => a[0] - b[0]).map(([lineNumber, words], index, allLines) => {
                             const lastWord = words[words.length - 1];
                             const isLastLineOfSurah = (() => {
-                                // 1. Direct check: is it the last word of the surah?
-                                if (lastWord?.char_type_name === "end") {
-                                    const vk = lastWord.verse_key;
-                                    if (vk) {
-                                        const [, vNum] = vk.split(":").map(Number);
-                                        if (vNum === chapter.verses_count) return true;
-                                    }
+                                if (!lastWord) return false;
+                                const vk = lastWord.verse_key;
+                                if (!vk) return false;
+                                const [cId, vNum] = vk.split(":").map(Number);
+                                
+                                // 1. Direct check: is it the last word of its surah?
+                                if (lastWord.char_type_name === "end") {
+                                    const c = chapters.find(ch => ch.id === cId);
+                                    if (c && vNum === c.verses_count) return true;
                                 }
+
                                 // 2. Contextual check: is it the last line of this view?
                                 if (index === allLines.length - 1) {
-                                    // If it's the last line of the last page, it's definitely the end of the surat.
                                     const allPages = Array.from(pages.keys()).sort((a, b) => a - b);
                                     if (page === allPages[allPages.length - 1]) return true;
                                 }
-                                // 3. Sparse check (similar to QcfMushafLines)
-                                if (words.length < 5) {
-                                    const vk = words[0]?.verse_key;
-                                    if (vk) {
-                                        const [, vNum] = vk.split(":").map(Number);
-                                        if (vNum === chapter.verses_count) return true;
-                                    }
+
+                                // 3. Transition check: does the NEXT line start a new surah?
+                                const nextLineWords = allLines[index + 1]?.[1];
+                                const nextFirstWord = nextLineWords?.[0];
+                                if (nextFirstWord) {
+                                    const [nextCId] = nextFirstWord.verse_key.split(":").map(Number);
+                                    if (nextCId !== cId) return true;
                                 }
+
                                 return false;
                             })();
 
@@ -72,12 +72,28 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                             const justify = (isCenteredPage || isShortLine || isLastLineOfSurah || isShortSurah) ? "justify-center gap-[0.5em] sm:gap-[0.7em]" : "justify-between";
                             const lineClasses = `flex w-full items-center ${justify}`;
 
+                            // Detect if this line starts a new surah
+                            const firstWord = words[0];
+                            const isNewSurahStart = firstWord?.verse_key?.endsWith(":1") && firstWord.position === 1;
+                            const currentChapterId = firstWord ? Number.parseInt(firstWord.verse_key.split(":")[0], 10) : null;
+                            const currentChapter = chapters.find(c => c.id === currentChapterId);
+
                             return (
-                                <div
-                                    key={lineNumber}
-                                    className={lineClasses}
-                                    style={{ direction: 'rtl' }}
-                                >
+                                <React.Fragment key={lineNumber}>
+                                    {isNewSurahStart && currentChapter && (
+                                        <div className="pt-10 mb-6 w-full text-center">
+                                            <SurahHeader chapter={currentChapter} />
+                                            {currentChapter.id !== 1 && currentChapter.id !== 9 && (
+                                                <div className="mt-6 mb-10">
+                                                    <Bismillah />
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+                                    <div
+                                        className={lineClasses}
+                                        style={{ direction: 'rtl' }}
+                                    >
                                     {words.map(w => {
                                         const rawHtml = w.text_uthmani_tajweed || w.text_qpc_hafs || w.text_uthmani || w.text || "";
                                         const refinedHtml = refineTajweed(rawHtml);
@@ -96,7 +112,8 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                                             />
                                         );
                                     })}
-                                </div>
+                                    </div>
+                                </React.Fragment>
                             );
                         })}
                         <div className="mt-8 text-center text-gray-400 text-sm font-semibold border-t border-gray-100 pt-4">
