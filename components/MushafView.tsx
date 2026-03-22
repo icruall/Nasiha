@@ -71,12 +71,23 @@ export function MushafView({ verses, chapter, chapters }: { verses: ChapterVerse
                             const justify = (isCenteredPage || isShortLine || isLastLineOfSurah || isShortSurah) ? "justify-center gap-[0.5em] sm:gap-[0.7em]" : "justify-between";
                             const lineClasses = `flex w-full items-center ${justify}`;
 
+                            // Detect if this line starts a new surah
+                            const firstWord = words[0];
+                            const isNewSurahStart = firstWord?.verse_key?.endsWith(":1") && firstWord.position === 1;
+                            const currentChapterId = firstWord ? Number.parseInt(firstWord.verse_key.split(":")[0], 10) : null;
+                            const currentChapter = chapters.find(c => c.id === currentChapterId);
+
                             return (
-                                <div
-                                    key={lineNumber}
-                                    className={lineClasses}
-                                    style={{ direction: 'rtl' }}
-                                >
+                                <React.Fragment key={lineNumber}>
+                                    {isNewSurahStart && currentChapter && currentChapter.id !== 1 && currentChapter.id !== 9 && (
+                                        <div className="mt-6 mb-10 w-full flex justify-center">
+                                            <Bismillah />
+                                        </div>
+                                    )}
+                                    <div
+                                        className={lineClasses}
+                                        style={{ direction: 'rtl' }}
+                                    >
                                     {words.map(w => {
                                         const rawHtml = w.text_uthmani_tajweed || w.text_qpc_hafs || w.text_uthmani || w.text || "";
                                         const refinedHtml = refineTajweed(rawHtml);
@@ -95,7 +106,8 @@ export function MushafView({ verses, chapter, chapters }: { verses: ChapterVerse
                                             />
                                         );
                                     })}
-                                </div>
+                                    </div>
+                                </React.Fragment>
                             );
                         })}
                         <div className="mt-8 text-center text-gray-400 text-sm font-semibold border-t border-gray-100 pt-4">
