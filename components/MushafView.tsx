@@ -30,7 +30,7 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                 return (
                     <div
                         key={page}
-                        className={`w-[min(100%,800px)] px-3 sm:px-12 rounded-[2rem] flex flex-col justify-center min-h-[600px] ${pageGap} [--mushaf-font-size:22px] sm:[--mushaf-font-size:32px]`}
+                        className={`w-[min(100%,800px)] px-2 sm:px-12 rounded-[2rem] flex flex-col justify-center min-h-[600px] ${pageGap}`}
                         style={{ backgroundColor: '#FFFFEE' }}
                     >
                         {isFirstPage && chapter.id !== 1 && chapter.id !== 9 && (
@@ -69,10 +69,8 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                             const isShortSurah = (chapter.verses_count || 0) <= 10;
 
                             const isShortLine = words.length < 5;
-                            const justify = (isCenteredPage || isShortLine || isLastLineOfSurah || isShortSurah) 
-                                ? "justify-center gap-[0.4em] sm:gap-[0.7em]" 
-                                : "justify-center sm:justify-between gap-[0.3em] sm:gap-0";
-                            const lineClasses = `flex w-full items-center flex-wrap ${justify}`;
+                            const justify = (isCenteredPage || isShortLine || isLastLineOfSurah || isShortSurah) ? "justify-center gap-[0.5em] sm:gap-[0.7em]" : "justify-between";
+                            const lineClasses = `flex w-full items-center ${justify}`;
 
                             return (
                                 <div
@@ -90,8 +88,8 @@ export function MushafView({ verses, chapter }: { verses: ChapterVerseWithWords[
                                                 className="tajweed text-gray-900 flex-none"
                                                 style={{ 
                                                     fontFamily: 'UthmanicHafs, serif', 
-                                                    fontSize: 'var(--mushaf-font-size, 22px)', 
-                                                    lineHeight: '2.2' 
+                                                    fontSize: 'clamp(15px, 4.3vw, 36px)', 
+                                                    lineHeight: '2.0' 
                                                 }}
                                                 lang="ar"
                                                 dangerouslySetInnerHTML={{ __html: refinedHtml }}
