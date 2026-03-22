@@ -7,7 +7,7 @@ export function Bismillah() {
   return (
     <div className="mb-4 flex flex-col items-center justify-center text-center space-y-2">
       <div
-        className="text-4xl md:text-5xl leading-tight text-gray-900 select-none tajweed"
+        className="text-2xl sm:text-4xl md:text-5xl leading-tight text-gray-900 select-none tajweed"
         style={{ fontFamily: "'UthmanicHafs', serif", direction: 'rtl' }}
         dangerouslySetInnerHTML={{ __html: bismillah }}
       />

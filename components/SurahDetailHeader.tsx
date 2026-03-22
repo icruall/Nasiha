@@ -14,9 +14,9 @@ export function SurahDetailHeader({ chapter }: { chapter: QuranChapter }) {
 
                 {/* Center: Names */}
                 <div className="flex flex-col items-center flex-[2] px-4">
-                    <h1 className="text-5xl text-emerald-400 mb-2 leading-tight flex items-center justify-center gap-4" style={{ fontFamily: 'UthmanicHafs, serif' }}>
+                    <h1 className="text-3xl sm:text-5xl text-emerald-400 mb-2 leading-tight flex flex-wrap items-center justify-center gap-4 text-center" style={{ fontFamily: 'UthmanicHafs, serif' }}>
                         {chapter.name_arabic}
-                        <span className="text-5xl text-emerald-400">سورة</span>
+                        <span className="text-3xl sm:text-5xl text-emerald-400">سورة</span>
                     </h1>
                     <h2 className="text-2xl font-black text-gray-100 mb-1">
                         Surah {chapter.id === 3 ? "Al-'Imran" : chapter.name_simple}
