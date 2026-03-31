@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Amiri, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { Amiri } from 'next/font/google'
 import SiteHeader from "@/components/SiteHeader";
+import NextTopLoader from 'nextjs-toploader';
+import PageTransition from "@/components/PageTransition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,8 +21,13 @@ const amiri = Amiri({
   variable: '--font-amiri',
 })
 
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+})
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nasiha.app'), // change to your real domain later
+  metadataBase: new URL('https://nasiha.app'),
   title: {
     default: 'Nasiha — A calm space for reflection',
     template: '%s — Nasiha',
@@ -48,11 +54,27 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${amiri.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${amiri.variable} ${playfair.variable} antialiased selection:bg-sky-500/30`}
       >
+        <NextTopLoader 
+          color="#eab308" 
+          initialPosition={0.08} 
+          crawlSpeed={200} 
+          height={3} 
+          crawl={true} 
+          showSpinner={false} 
+          easing="ease" 
+          speed={200} 
+          shadow="0 0 10px #eab308,0 0 5px #eab308"
+        />
+        <div className="living-background" aria-hidden="true" />
         <QuranProvider>
           <SiteHeader />
-          {children}
+          <div className="relative z-10">
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </div>
         </QuranProvider>
       </body>
     </html>

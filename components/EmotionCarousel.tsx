@@ -29,66 +29,33 @@ export default function EmotionCarousel({ emotions }: EmotionCarouselProps) {
           <Link
             key={emotion._id}
             href={`/emotion/${emotion.slug}`}
-            className="
-              rounded-2xl border border-white/10
-              px-5 py-5
-              transition-transform duration-200
-              hover:-translate-y-0.5
-              focus:outline-none
-            "
-            style={{
-              background: `
-                radial-gradient(
-                  120% 120% at 2% 0%,
-                  ${color}12 0%,
-                  transparent 60%
-                ),
-                rgba(255,255,255,0.02)
-              `,
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `
-                radial-gradient(
-                  120% 120% at 4% 6%,
-                  ${color}20 0%,
-                  transparent 62%
-                ),
-                rgba(255,255,255,0.035)
-              `
-              e.currentTarget.style.filter = 'brightness(1.06) saturate(1.12)'
-              e.currentTarget.style.boxShadow = `0 0 0 1px ${color} inset`
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = `
-                radial-gradient(
-                  120% 120% at 2% 0%,
-                  ${color}12 0%,
-                  transparent 60%
-                ),
-                rgba(255,255,255,0.02)
-              `
-              e.currentTarget.style.filter = 'brightness(1) saturate(1)'
-              e.currentTarget.style.boxShadow = 'none'
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.boxShadow = `0 0 0 2px ${color}`
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.boxShadow = 'none'
-            }}
+            className="group relative block h-full overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-1 active:scale-[0.98] glass-card border border-white/5 bg-white/[0.02]"
           >
-            <div
-              className="mb-4 h-1 w-12 rounded-full"
-              style={{ backgroundColor: color }}
-            />
+            {/* Signature Border Light (Emotions = Sky) */}
+            <div className="absolute inset-0 border-2 border-sky-500/20 rounded-3xl pointer-events-none group-hover:border-sky-400/50 transition-colors duration-500" />
+            
+            <div className="relative p-6 sm:p-8 flex flex-col h-full space-y-4">
+              <div 
+                className="w-12 h-1.5 rounded-full shadow-[0_0_15px_rgba(var(--sky-glow),0.3)] transition-all duration-500 group-hover:w-20"
+                style={{ backgroundColor: color }}
+              />
 
-            <h3 className="text-xl font-semibold text-gray-50">
-              {emotion.title}
-            </h3>
+              <div className="space-y-2">
+                <h3 className="text-2xl font-serif text-white group-hover:text-sky-300 transition-colors">
+                  {emotion.title}
+                </h3>
 
-            <p className="mt-2 text-sm text-gray-100 leading-relaxed">
-              {emotion.description}
-            </p>
+                <p className="text-sm text-sky-100/40 leading-relaxed font-sans line-clamp-3 group-hover:text-sky-100/60 transition-colors">
+                  {emotion.description}
+                </p>
+              </div>
+
+              <div className="mt-auto pt-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+                <span className="text-[10px] text-sky-400 font-sans tracking-widest uppercase font-bold">
+                  Explore Guidance
+                </span>
+              </div>
+            </div>
           </Link>
         )
       })}

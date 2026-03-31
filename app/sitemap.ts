@@ -18,6 +18,14 @@ export default async function sitemap() {
       url: 'https://nasiha.app',
       lastModified: new Date(),
     },
+    {
+      url: 'https://nasiha.app/quran',
+      lastModified: new Date(),
+    },
+    {
+      url: 'https://nasiha.app/hisn-ul-muslim',
+      lastModified: new Date(),
+    },
     ...emotionRoutes,
   ]
 }

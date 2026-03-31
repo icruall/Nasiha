@@ -16,6 +16,8 @@ type QuranContextType = {
   setSelectedChapterId: (id: number | null) => void;
   chapters: QuranChapter[];
   isLoadingData: boolean;
+  fontSize: number;
+  setFontSize: (size: number) => void;
 };
 
 const QuranContext = createContext<QuranContextType | undefined>(undefined);
@@ -26,9 +28,22 @@ export function QuranProvider({ children }: { children: React.ReactNode }) {
   const [selectedChapterId, setSelectedChapterId] = useState<number | null>(null);
   const [chapters, setChapters] = useState<QuranChapter[]>([]);
   const [isLoadingData, setIsLoadingData] = useState(false);
+  const [fontSize, setFontSize] = useState(32); // Default Arabic font size
   const pathname = usePathname();
 
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+
+  // Automatically close sidebar when navigation occurs
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedSize = localStorage.getItem("quran-font-size");
+      if (savedSize) setFontSize(parseInt(savedSize, 10));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("quran-font-size", fontSize.toString());
+  }, [fontSize]);
 
   // Automatically close sidebar when navigation occurs
   useEffect(() => {
@@ -63,6 +78,8 @@ export function QuranProvider({ children }: { children: React.ReactNode }) {
         setSelectedChapterId,
         chapters,
         isLoadingData,
+        fontSize,
+        setFontSize,
       }}
     >
       {children}
