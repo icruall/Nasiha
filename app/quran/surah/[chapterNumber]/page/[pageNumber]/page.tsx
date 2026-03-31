@@ -40,35 +40,38 @@ export default async function SurahMushafPage({
   const next = page < endPage ? page + 1 : null
 
   return (
-    <main className="min-h-screen flex justify-center px-6 py-16">
-      <div className="w-full max-w-3xl space-y-6">
-        <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div className="space-y-2">
-            <p className="text-xs uppercase tracking-wide text-gray-400">
+    <main className="min-h-screen flex flex-col items-center px-4 py-12 sm:px-6 sm:py-20">
+      <div className="w-full max-w-4xl space-y-12">
+        <header 
+          className="flex flex-col gap-6 p-8 sm:p-12 rounded-[3rem] shadow-2xl transition-all duration-500 relative overflow-hidden sm:flex-row sm:items-end sm:justify-between"
+          style={{ backgroundColor: '#FFFFEE' }}
+        >
+          <div className="space-y-4">
+            <p className="text-xs uppercase tracking-widest font-bold text-gray-500">
               Surah {String(ch.id).padStart(3, '0')}
             </p>
-            <h1 className="text-2xl font-semibold tracking-tight text-gray-50">
+            <h1 className="text-3xl font-black tracking-tight text-gray-900">
               {ch.name_simple}
-              {ch.translated_name?.name ? ` — ${ch.translated_name.name}` : ''}
+              {ch.translated_name?.name ? <span className="text-gray-400 font-medium"> — {ch.translated_name.name}</span> : ''}
             </h1>
-            <div className="font-[var(--font-amiri)] text-4xl leading-[1.2] text-gray-50">
+            <div className="font-[var(--font-amiri)] text-5xl leading-tight text-emerald-600">
               {ch.name_arabic}
             </div>
-            <p className="text-xs text-gray-400">
-              Mushaf page {page} (range {startPage}–{endPage})
+            <p className="text-sm font-semibold text-gray-500">
+              Mushaf page {page} <span className="mx-2 opacity-30">|</span> range {startPage}–{endPage}
             </p>
           </div>
 
-          <nav className="flex flex-wrap items-center gap-2">
+          <nav className="flex flex-wrap items-center gap-3">
             <Link
               href="/quran"
-              className="rounded-xl border px-3 py-2 text-sm bg-white/[0.02] border-white/10 text-gray-200 hover:border-white/20 hover:bg-white/[0.04]"
+              className="rounded-2xl border border-gray-200 px-5 py-2.5 text-sm font-bold bg-white text-gray-700 hover:border-emerald-500/30 hover:bg-emerald-50/50 transition-all duration-300"
             >
               Surah list
             </Link>
             <Link
               href={`/quran/surah/${chapter}/verse-by-verse`}
-              className="rounded-xl border px-3 py-2 text-sm bg-white/[0.02] border-white/10 text-gray-200 hover:border-white/20 hover:bg-white/[0.04]"
+              className="rounded-2xl border border-gray-200 px-5 py-2.5 text-sm font-bold bg-white text-gray-700 hover:border-emerald-500/30 hover:bg-emerald-50/50 transition-all duration-300"
             >
               Verse by verse
             </Link>
@@ -80,11 +83,10 @@ export default async function SurahMushafPage({
               }
               aria-disabled={!prev}
               className={[
-                'rounded-xl border px-3 py-2 text-sm',
-                'bg-white/[0.02] border-white/10 text-gray-200',
+                'rounded-2xl border px-5 py-2.5 text-sm font-bold transition-all duration-300',
                 prev
-                  ? 'hover:border-white/20 hover:bg-white/[0.04]'
-                  : 'opacity-50 pointer-events-none',
+                  ? 'bg-white border-gray-200 text-gray-700 hover:border-emerald-500/30 hover:bg-emerald-50/50'
+                  : 'bg-gray-50 border-gray-100 text-gray-300 opacity-50 pointer-events-none',
               ].join(' ')}
             >
               Prev
@@ -97,11 +99,10 @@ export default async function SurahMushafPage({
               }
               aria-disabled={!next}
               className={[
-                'rounded-xl border px-3 py-2 text-sm',
-                'bg-white/[0.02] border-white/10 text-gray-200',
+                'rounded-2xl border px-5 py-2.5 text-sm font-bold transition-all duration-300',
                 next
-                  ? 'hover:border-white/20 hover:bg-white/[0.04]'
-                  : 'opacity-50 pointer-events-none',
+                  ? 'bg-white border-gray-200 text-gray-700 hover:border-emerald-500/30 hover:bg-emerald-50/50'
+                  : 'bg-gray-50 border-gray-100 text-gray-300 opacity-50 pointer-events-none',
               ].join(' ')}
             >
               Next

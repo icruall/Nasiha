@@ -20,7 +20,13 @@ html {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-playfair);
-  --quran-font-size: 32px;
+  --quran-font-size: 28px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --quran-font-size: 45px;
+  }
 }
 
 body {
@@ -97,7 +103,9 @@ body {
   font-size: var(--quran-font-size, 32px);
   line-height: 2.15;
   min-height: 2.15em;
-  white-space: nowrap;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 
@@ -127,7 +135,7 @@ body {
 
 .qcf-white-container {
   background-color: #FFFFEE !important;
-  color: #1a1a1a !important;
+  color: #101010;
   border-radius: 1.5rem;
   border: 1px solid #e7e5e4 !important;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
@@ -137,7 +145,7 @@ body {
 .qcf-white-container .qcf-word,
 .qcf-white-container .qcf-end-mushaf,
 .qcf-white-container .qcf-end-vbv {
-  color: #1a1a1a !important;
+  color: inherit;
 }
 
 /* Prevent last line of surah or page from stretching */

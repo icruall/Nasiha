@@ -44,7 +44,10 @@ export function SurahViewSelector({ verses, chapter, chapters }: { verses: Chapt
             </div>
 
             {mode === "translation" ? (
-                <div className="w-full max-w-4xl border border-white/5 rounded-[3rem] py-8 sm:py-16 shadow-2xl glass-card bg-white/[0.01]">
+                <div 
+                    className="w-full max-w-4xl rounded-[3rem] py-8 sm:py-16 shadow-2xl transition-all duration-500"
+                    style={{ backgroundColor: '#FFFFEE' }}
+                >
                     {chapter.id !== 1 && chapter.id !== 9 && (
                         <div className="mb-20 mt-4 opacity-80 hover:opacity-100 transition-opacity duration-700">
                             <Bismillah />

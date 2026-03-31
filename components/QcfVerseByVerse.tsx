@@ -75,7 +75,6 @@ function QcfVerse(props: {
   showTranslation: boolean;
 }) {
   const { verse, tajweedColors, showTranslation } = props;
-  const { fontSize } = useQuran();
   const words = verse.words ?? [];
   const translationHtml = verse.translations?.[0]?.text ?? "";
 
@@ -115,10 +114,10 @@ function QcfVerse(props: {
                 return (
                   <span
                     key={w.id}
-                    className="tajweed text-gray-900 flex-none"
+                    className="tajweed !text-black flex-none"
                     style={{ 
                         fontFamily: 'UthmanicHafs, serif', 
-                        fontSize: `${fontSize}px`, 
+                        fontSize: 'var(--quran-font-size)', 
                         lineHeight: '2.0' 
                     }}
                     lang="ar"
@@ -140,8 +139,8 @@ function QcfVerse(props: {
                   className="qcf-word"
                   style={
                     tajweedColors
-                      ? { fontFamily: `${fam}, serif`, fontPalette: "--qcf-tajweed", fontSize: `${fontSize}px` } as React.CSSProperties
-                      : { fontFamily: `${fam}, serif`, fontSize: `${fontSize}px` } as React.CSSProperties
+                      ? { fontFamily: `${fam}, serif`, fontPalette: "--qcf-tajweed", fontSize: 'var(--quran-font-size)' } as React.CSSProperties
+                      : { fontFamily: `${fam}, serif`, fontSize: 'var(--quran-font-size)' } as React.CSSProperties
                   }
                   dangerouslySetInnerHTML={{ __html: code }}
                 />
@@ -158,7 +157,7 @@ function QcfVerse(props: {
       {showTranslation && translationHtml ? (
         <div
           dir="ltr"
-          className="mt-6 text-lg leading-relaxed text-zinc-600 text-left border-t border-gray-50 pt-5"
+          className="mt-6 text-lg leading-relaxed text-gray-600 text-left border-t border-gray-50 pt-5"
           dangerouslySetInnerHTML={{ __html: translationHtml }}
         />
       ) : null}

@@ -6,7 +6,6 @@ import { refineTajweed } from "@/lib/tajweed";
 import { useQuran } from "@/lib/quranContext";
 
 export function MushafView({ verses, chapter, chapters }: { verses: ChapterVerseWithWords[], chapter: QuranChapter, chapters: QuranChapter[] }) {
-    const { fontSize } = useQuran();
     // Group words by page_number, then by line_number
     const pages = new Map<number, Map<number, MushafWord[]>>();
 
@@ -33,7 +32,7 @@ export function MushafView({ verses, chapter, chapters }: { verses: ChapterVerse
                 return (
                     <div
                         key={page}
-                        className={`w-[min(100%,800px)] px-2 sm:px-12 rounded-[2rem] flex flex-col justify-center min-h-[600px] ${pageGap}`}
+                        className={`w-full max-w-4xl px-4 sm:px-12 md:px-16 rounded-[3rem] flex flex-col justify-center shadow-2xl transition-all duration-500 ${pageGap}`}
                         style={{ backgroundColor: '#FFFFEE' }}
                     >
                         {/* Surah Headers and Bismillah are now handled dynamically per line below */}
@@ -72,7 +71,7 @@ export function MushafView({ verses, chapter, chapters }: { verses: ChapterVerse
 
                             const isShortLine = words.length < 5;
                             const justify = (isCenteredPage || isShortLine || isLastLineOfSurah || isShortSurah) ? "justify-center gap-[0.5em] sm:gap-[0.7em]" : "justify-between";
-                            const lineClasses = `flex w-full items-center ${justify}`;
+                            const lineClasses = `flex flex-wrap w-full items-center ${justify}`;
 
                             // Detect if this line starts a new surah
                             const firstWord = words[0];
@@ -101,7 +100,7 @@ export function MushafView({ verses, chapter, chapters }: { verses: ChapterVerse
                                                 className="tajweed text-gray-900 flex-none"
                                                 style={{ 
                                                     fontFamily: 'UthmanicHafs, serif', 
-                                                    fontSize: `${fontSize}px`, 
+                                                    fontSize: 'var(--quran-font-size)', 
                                                     lineHeight: '2.0' 
                                                 }}
                                                 lang="ar"

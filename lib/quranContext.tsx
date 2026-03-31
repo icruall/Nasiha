@@ -16,8 +16,6 @@ type QuranContextType = {
   setSelectedChapterId: (id: number | null) => void;
   chapters: QuranChapter[];
   isLoadingData: boolean;
-  fontSize: number;
-  setFontSize: (size: number) => void;
 };
 
 const QuranContext = createContext<QuranContextType | undefined>(undefined);
@@ -28,29 +26,10 @@ export function QuranProvider({ children }: { children: React.ReactNode }) {
   const [selectedChapterId, setSelectedChapterId] = useState<number | null>(null);
   const [chapters, setChapters] = useState<QuranChapter[]>([]);
   const [isLoadingData, setIsLoadingData] = useState(false);
-  const [fontSize, setFontSize] = useState(32); // Default Arabic font size
   const pathname = usePathname();
 
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
-  // Initialize from localStorage with bounds check
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedSize = localStorage.getItem("quran-font-size");
-      if (savedSize) {
-        const parsed = parseInt(savedSize, 10);
-        if (parsed >= 20 && parsed <= 60) {
-          setFontSize(parsed);
-        }
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("quran-font-size", fontSize.toString());
-    // Also set it as a CSS variable on the root for easy access
-    document.documentElement.style.setProperty('--quran-font-size', `${fontSize}px`);
-  }, [fontSize]);
 
   // Automatically close sidebar when navigation occurs
   useEffect(() => {
@@ -85,8 +64,6 @@ export function QuranProvider({ children }: { children: React.ReactNode }) {
         setSelectedChapterId,
         chapters,
         isLoadingData,
-        fontSize,
-        setFontSize,
       }}
     >
       {children}
