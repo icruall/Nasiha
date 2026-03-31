@@ -140,7 +140,7 @@ export function QcfMushafLines({
                       <span
                         key={w.id}
                         className="qcf-end-mushaf"
-                        style={{ fontFamily: "UthmanicHafs, serif" }}
+                        style={{ fontFamily: "UthmanicHafs, serif", fontSize: "1em" }}
                       >
                         {marker}
                       </span>

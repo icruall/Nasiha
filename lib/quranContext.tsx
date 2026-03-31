@@ -33,16 +33,23 @@ export function QuranProvider({ children }: { children: React.ReactNode }) {
 
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
-  // Automatically close sidebar when navigation occurs
+  // Initialize from localStorage with bounds check
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedSize = localStorage.getItem("quran-font-size");
-      if (savedSize) setFontSize(parseInt(savedSize, 10));
+      if (savedSize) {
+        const parsed = parseInt(savedSize, 10);
+        if (parsed >= 20 && parsed <= 60) {
+          setFontSize(parsed);
+        }
+      }
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem("quran-font-size", fontSize.toString());
+    // Also set it as a CSS variable on the root for easy access
+    document.documentElement.style.setProperty('--quran-font-size', `${fontSize}px`);
   }, [fontSize]);
 
   // Automatically close sidebar when navigation occurs

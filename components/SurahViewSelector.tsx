@@ -5,8 +5,6 @@ import type { ChapterVerseWithWords, QuranChapter } from "@/lib/quranCom";
 import { TajweedVerseText } from "./TajweedVerseText";
 import { MushafView } from "./MushafView";
 import { Bismillah } from "./Bismillah";
-import FontSizeSlider from "./FontSizeSlider";
-
 export function SurahViewSelector({ verses, chapter, chapters }: { verses: ChapterVerseWithWords[], chapter: QuranChapter, chapters: QuranChapter[] }) {
     const [mode, setMode] = useState<"translation" | "mushaf">("mushaf");
 
@@ -20,8 +18,8 @@ export function SurahViewSelector({ verses, chapter, chapters }: { verses: Chapt
 
     return (
         <div className="w-full mt-4 flex flex-col items-center">
-            {/* Controls Row */}
-            <div className="w-full max-w-4xl flex flex-col sm:flex-row items-center justify-between gap-6 mb-12 px-2">
+            {/* Controls Row - Just the Mode Toggle */}
+            <div className="w-full max-w-4xl flex justify-center mb-12 px-2">
                 {/* Mode Toggle */}
                 <div className="flex bg-white/[0.03] backdrop-blur-md p-1.5 rounded-full border border-white/10 shadow-lg">
                     <button
@@ -43,11 +41,6 @@ export function SurahViewSelector({ verses, chapter, chapters }: { verses: Chapt
                         Reading
                     </button>
                 </div>
-
-                {/* Font Size Control - Only show in Translation mode for now */}
-                {mode === "translation" && (
-                    <FontSizeSlider />
-                )}
             </div>
 
             {mode === "translation" ? (

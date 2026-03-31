@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import type { ChapterVerseWithWords, MushafWord } from '@/lib/quranCom';
 import { refineTajweed } from '@/lib/tajweed';
+import { useQuran } from '@/lib/quranContext';
 
 const CDN_BASE = 'https://verses.quran.foundation';
 
@@ -74,6 +75,7 @@ function QcfVerse(props: {
   showTranslation: boolean;
 }) {
   const { verse, tajweedColors, showTranslation } = props;
+  const { fontSize } = useQuran();
   const words = verse.words ?? [];
   const translationHtml = verse.translations?.[0]?.text ?? "";
 
@@ -92,7 +94,6 @@ function QcfVerse(props: {
 
               if (isEnd) {
                 const marker = w.text_qpc_hafs ?? w.text_uthmani ?? "";
-                // If the marker contains Arabic letters, it's not a valid ayah number.
                 if (/[A-Za-z\u0621-\u064A]/.test(marker)) return null;
 
                 return (
@@ -114,8 +115,12 @@ function QcfVerse(props: {
                 return (
                   <span
                     key={w.id}
-                    className="tajweed text-gray-900"
-                    style={{ fontFamily: 'UthmanicHafs, serif', fontSize: 'clamp(26px, 3.0vw, 42px)' }}
+                    className="tajweed text-gray-900 flex-none"
+                    style={{ 
+                        fontFamily: 'UthmanicHafs, serif', 
+                        fontSize: `${fontSize}px`, 
+                        lineHeight: '2.0' 
+                    }}
                     lang="ar"
                     dangerouslySetInnerHTML={{ __html: tajweedHtml }}
                   />
@@ -135,8 +140,8 @@ function QcfVerse(props: {
                   className="qcf-word"
                   style={
                     tajweedColors
-                      ? { fontFamily: `${fam}, serif`, fontPalette: "--qcf-tajweed", fontSize: "clamp(26px, 3.0vw, 42px)" } as React.CSSProperties
-                      : { fontFamily: `${fam}, serif`, fontSize: "clamp(26px, 3.0vw, 42px)" } as React.CSSProperties
+                      ? { fontFamily: `${fam}, serif`, fontPalette: "--qcf-tajweed", fontSize: `${fontSize}px` } as React.CSSProperties
+                      : { fontFamily: `${fam}, serif`, fontSize: `${fontSize}px` } as React.CSSProperties
                   }
                   dangerouslySetInnerHTML={{ __html: code }}
                 />

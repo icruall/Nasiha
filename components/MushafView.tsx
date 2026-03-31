@@ -1,9 +1,12 @@
+"use client";
 import React from "react";
 import type { ChapterVerseWithWords, MushafWord, QuranChapter } from "@/lib/quranCom";
 import { Bismillah } from "./Bismillah";
 import { refineTajweed } from "@/lib/tajweed";
+import { useQuran } from "@/lib/quranContext";
 
 export function MushafView({ verses, chapter, chapters }: { verses: ChapterVerseWithWords[], chapter: QuranChapter, chapters: QuranChapter[] }) {
+    const { fontSize } = useQuran();
     // Group words by page_number, then by line_number
     const pages = new Map<number, Map<number, MushafWord[]>>();
 
@@ -98,7 +101,7 @@ export function MushafView({ verses, chapter, chapters }: { verses: ChapterVerse
                                                 className="tajweed text-gray-900 flex-none"
                                                 style={{ 
                                                     fontFamily: 'UthmanicHafs, serif', 
-                                                    fontSize: 'clamp(15px, 4.3vw, 36px)', 
+                                                    fontSize: `${fontSize}px`, 
                                                     lineHeight: '2.0' 
                                                 }}
                                                 lang="ar"
