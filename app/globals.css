@@ -20,12 +20,12 @@ html {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-playfair);
-  --quran-font-size: 28px;
+  --quran-font-size: 26px;
 }
 
 @media (min-width: 640px) {
   :root {
-    --quran-font-size: 45px;
+    --quran-font-size: 42px;
   }
 }
 
