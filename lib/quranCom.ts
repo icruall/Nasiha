@@ -16,7 +16,7 @@ export type TajweedVerse = {
   text_uthmani_tajweed: string
 }
 
-const API_BASE = 'https://api.quran.com/api/v4'
+const API_BASE = 'https://api.quran.com/api/qdc'
 const ONE_DAY = 60 * 60 * 24
 const MAX_PER_PAGE = 50
 
@@ -47,6 +47,7 @@ export type MushafWord = {
   verse_key: string
   line_number: number
   page_number: number
+  code_v1?: string
   code_v2?: string
   char_type_name?: string
   text_qpc_hafs?: string
@@ -65,13 +66,13 @@ export async function fetchMushafPageWords(options: {
   pageNumber: number
   mushaf?: number
 }): Promise<VerseWithWords[]> {
-  const { pageNumber, mushaf } = options
+  const { pageNumber, mushaf = 17 } = options
 
   const url = new URL(`${API_BASE}/verses/by_page/${pageNumber}`)
   url.searchParams.set('words', 'true')
   url.searchParams.set(
     'word_fields',
-    'id,position,verse_key,line_number,page_number,code_v2,char_type_name,text_qpc_hafs,text_uthmani',
+    'id,position,verse_key,line_number,page_number,code_v1,code_v2,char_type_name,text_qpc_hafs,text_uthmani,text_uthmani_tajweed',
   )
   url.searchParams.set('per_page', String(MAX_PER_PAGE))
   if (mushaf) url.searchParams.set('mushaf', String(mushaf))
@@ -179,8 +180,9 @@ export async function fetchVersesByChapter(options: {
 export async function fetchVersesByChapterWithWords(options: {
   chapterNumber: number
   translationIds?: number[]
+  mushaf?: number
 }): Promise<ChapterVerseWithWords[]> {
-  const { chapterNumber, translationIds = [85] } = options
+  const { chapterNumber, translationIds = [85], mushaf = 19 } = options
 
   const baseUrl = new URL(`${API_BASE}/verses/by_chapter/${chapterNumber}`)
   baseUrl.searchParams.set('language', 'en')
@@ -191,7 +193,7 @@ export async function fetchVersesByChapterWithWords(options: {
   baseUrl.searchParams.set('words', 'true')
   baseUrl.searchParams.set(
     'word_fields',
-    'id,position,verse_key,line_number,page_number,code_v2,char_type_name,text_qpc_hafs,text_uthmani,text_uthmani_tajweed',
+    'id,position,verse_key,line_number,page_number,code_v1,code_v2,char_type_name,text_qpc_hafs,text_uthmani,text_uthmani_tajweed',
   )
   baseUrl.searchParams.set('per_page', String(MAX_PER_PAGE))
   if (translationIds.length) {

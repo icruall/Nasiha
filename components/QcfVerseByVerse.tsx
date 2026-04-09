@@ -1,67 +1,23 @@
 "use client";
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import type { ChapterVerseWithWords, MushafWord } from '@/lib/quranCom';
 import { refineTajweed } from '@/lib/tajweed';
-import { useQuran } from '@/lib/quranContext';
-
-const CDN_BASE = 'https://verses.quran.foundation';
-
-function qcfFontUrl(pageNumber: number, tajweedColors: boolean) {
-  if (!tajweedColors) {
-    return `${CDN_BASE}/fonts/quran/hafs/v2/woff2/p${pageNumber}.woff2`;
-  }
-  return `${CDN_BASE}/fonts/quran/hafs/v4/colrv1/woff2/p${pageNumber}.woff2`;
-}
 
 export function QcfVerseByVerse({
   verses,
-  tajweedColors,
   showTranslation,
 }: {
   verses: ChapterVerseWithWords[];
-  tajweedColors: boolean;
   showTranslation: boolean;
+  tajweedColors?: boolean; // kept optionally to allow parent to pass it without breaking
 }) {
-  const pageNumbers = useMemo(() => {
-    const set = new Set<number>();
-    for (const v of verses) {
-      for (const w of v.words ?? []) {
-        if (w.page_number) set.add(w.page_number);
-      }
-    }
-    return [...set].sort((a, b) => a - b);
-  }, [verses]);
-
-  const fontFacesCss = useMemo(() => {
-    const faces = pageNumbers
-      .map((p) => {
-        const fam = `qcf-p${p}-${tajweedColors ? "v4" : "v2"}`;
-        const url = qcfFontUrl(p, tajweedColors);
-        return `@font-face{font-family:'${fam}';src:url('${url}') format('woff2');font-display:swap;}`;
-      })
-      .join("\n");
-
-    const palette = tajweedColors
-      ? `
-@font-palette-values --qcf-tajweed { font-family: 'qcf-p1-v4'; base-palette: 0; }
-`
-      : "";
-
-    return `
-${faces}
-${palette}
-`;
-  }, [pageNumbers, tajweedColors]);
-
   return (
     <div dir="rtl" lang="ar" className="qcf-page space-y-4">
-      <style dangerouslySetInnerHTML={{ __html: fontFacesCss }} />
       {verses.map((v) => (
         <QcfVerse
           key={v.id}
           verse={v}
-          tajweedColors={tajweedColors}
           showTranslation={showTranslation}
         />
       ))}
@@ -71,10 +27,9 @@ ${palette}
 
 function QcfVerse(props: {
   verse: ChapterVerseWithWords;
-  tajweedColors: boolean;
   showTranslation: boolean;
 }) {
-  const { verse, tajweedColors, showTranslation } = props;
+  const { verse, showTranslation } = props;
   const words = verse.words ?? [];
   const translationHtml = verse.translations?.[0]?.text ?? "";
 
@@ -98,8 +53,8 @@ function QcfVerse(props: {
                 return (
                   <span
                     key={w.id}
-                    className="qcf-end-vbv"
-                    style={{ fontFamily: "UthmanicHafs, serif" }}
+                    className="qcf-end-vbv text-emerald-600/60 font-semibold"
+                    style={{ fontFamily: "UthmanicHafs, serif", fontSize: "0.85em", padding: "0 0.5ch" }}
                   >
                     {marker}
                   </span>
@@ -107,17 +62,15 @@ function QcfVerse(props: {
               }
 
               const tajweedHtml = w.text_uthmani_tajweed ? refineTajweed(w.text_uthmani_tajweed) : "";
-              const fam = `qcf-p${w.page_number}-${tajweedColors ? "v4" : "v2"}`;
-              const code = w.code_v2 ?? "";
 
-              if (tajweedColors && tajweedHtml) {
+              if (tajweedHtml) {
                 return (
                   <span
                     key={w.id}
                     className="tajweed !text-black flex-none"
                     style={{ 
                         fontFamily: 'UthmanicHafs, serif', 
-                        fontSize: 'var(--quran-font-size)', 
+                        fontSize: 'var(--quran-font-size, 2rem)', 
                         lineHeight: '2.0' 
                     }}
                     lang="ar"
@@ -126,25 +79,7 @@ function QcfVerse(props: {
                 );
               }
 
-              const isStandardArabicEntity = code.startsWith("&#") && (() => {
-                const num = parseInt(code.replace(/[^0-9]/g, ""), 10);
-                return num >= 1536 && num <= 1791; // 0x0600 - 0x06FF
-              })();
-
-              if (!code || /[A-Za-z\u0621-\u064A]/.test(code) || /^[a-zA-Z0-9\s]+$/.test(code) || isStandardArabicEntity) return null;
-
-              return (
-                <span
-                  key={w.id}
-                  className="qcf-word"
-                  style={
-                    tajweedColors
-                      ? { fontFamily: `${fam}, serif`, fontPalette: "--qcf-tajweed", fontSize: 'var(--quran-font-size)' } as React.CSSProperties
-                      : { fontFamily: `${fam}, serif`, fontSize: 'var(--quran-font-size)' } as React.CSSProperties
-                  }
-                  dangerouslySetInnerHTML={{ __html: code }}
-                />
-              );
+              return null;
             })}
           </div>
         </div>

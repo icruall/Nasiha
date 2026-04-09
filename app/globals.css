@@ -22,17 +22,24 @@ html {
   --font-serif: var(--font-playfair);
   /* Fixed font size for Mushaf to ensure lines never wrap on mobile */
   --quran-font-size: 19px;
+  /* Larger font size for Translation mode where wrapping is allowed */
+  --quran-font-size-translation: 28px;
 }
 
 @media (min-width: 640px) {
   :root {
     --quran-font-size: 42px;
+    --quran-font-size-translation: 48px;
   }
 }
 
 body {
   min-height: 100vh;
-  background-color: var(--background);
+  background:
+    radial-gradient(circle at 0% -20%, rgba(207, 229, 242, 0.55) 0, transparent 55%),
+    radial-gradient(circle at 80% 120%, rgba(207, 229, 242, 0.42) 0, transparent 60%),
+    radial-gradient(circle at -10% 130%, rgba(207, 229, 242, 0.38) 0, transparent 55%),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   overflow-x: hidden;

@@ -4,7 +4,6 @@ import {
   fetchChapters,
   fetchVersesByChapterWithWords,
 } from '@/lib/quranCom'
-import { QuranTajweedLegendToggle } from '@/components/QuranTajweedLegendToggle'
 import { QcfVerseByVerse } from '@/components/QcfVerseByVerse'
 import { Bismillah } from '@/components/Bismillah'
 import { SurahHeader } from '@/components/SurahHeader'
@@ -19,7 +18,7 @@ export default async function SurahVerseByVersePage({
   searchParams,
 }: {
   params: Promise<{ chapterNumber: string }>
-  searchParams?: Promise<{ translation?: string; showTranslation?: string; tajweed?: string }>
+  searchParams?: Promise<{ translation?: string; showTranslation?: string }>
 }) {
   const { chapterNumber } = await params
   const sp = (await searchParams) ?? {}
@@ -29,7 +28,6 @@ export default async function SurahVerseByVersePage({
 
   const translationId = Number.parseInt(sp.translation ?? '85', 10)
   const showTranslation = (sp.showTranslation ?? '1') !== '0'
-  const tajweedColors = true
 
   const [chapters, verses] = await Promise.all([
     fetchChapters(),
@@ -140,13 +138,8 @@ export default async function SurahVerseByVersePage({
           </div>
           <QcfVerseByVerse
             verses={verses}
-            tajweedColors={tajweedColors}
             showTranslation={showTranslation}
           />
-
-          <div className="mt-6 border-t border-gray-100 pt-4 px-4 pb-6 md:px-8">
-            <QuranTajweedLegendToggle />
-          </div>
         </div>
       </div>
     </main>

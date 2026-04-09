@@ -3,15 +3,15 @@ import type { ChapterVerseWithWords } from "@/lib/quranCom";
 import { refineTajweed } from "@/lib/tajweed";
 import { useQuran } from "@/lib/quranContext";
 
-export function TajweedVerseText({ verse }: { verse: ChapterVerseWithWords }) {
-    
-    // We concatenate each word's text_uthmani_tajweed field into a seamless string
-    let tajweed = (verse.words || [])
-        .map(w => w.text_uthmani_tajweed || "")
-        .join(" ");
-
-    tajweed = refineTajweed(tajweed);
-
+export function TajweedVerseText({ 
+    verse, 
+    showTajweed = true 
+}: { 
+    verse: ChapterVerseWithWords, 
+    showTajweed?: boolean 
+}) {
+    // Detect which pages are used in this verse to load fonts
+    const pages = Array.from(new Set((verse.words || []).map(w => w.page_number))).filter(Boolean);
     const mainTranslation = verse.translations?.[0]?.text;
 
     useEffect(() => {
@@ -39,6 +39,23 @@ export function TajweedVerseText({ verse }: { verse: ChapterVerseWithWords }) {
 
     return (
         <div id={`ayah-${verse.verse_number}`} className="py-12 px-4 sm:px-10 border-b border-gray-100 last:border-0 group quran-ayah transition-colors duration-500 hover:bg-black/[0.01] overflow-hidden qcf-white-container !rounded-none !shadow-none !border-x-0 !border-t-0">
+            {/* Dynamic Font Loading for this Ayah */}
+            {pages.map(page => {
+                const fontBase = showTajweed 
+                    ? `https://verses.quran.foundation/fonts/quran/hafs/v4/colrv1/woff2/p${page}.woff2`
+                    : `https://verses.quran.foundation/fonts/quran/hafs/v2/woff2/p${page}.woff2`;
+                
+                return (
+                    <style key={`font-v2-${page}-${showTajweed}`} dangerouslySetInnerHTML={{ __html: `
+                        @font-face {
+                            font-family: 'quran-font-v2-${page}-${showTajweed ? 'tajweed' : 'plain'}';
+                            src: url('${fontBase}') format('woff2');
+                            font-display: swap;
+                        }
+                    `}} />
+                );
+            })}
+            
             <div className="flex flex-col md:flex-row gap-8 md:gap-14">
                 {/* Verse Number Indicator */}
                 <div className="flex-none flex items-start mt-2">
@@ -48,14 +65,28 @@ export function TajweedVerseText({ verse }: { verse: ChapterVerseWithWords }) {
                 </div>
 
                 <div className="flex-1 space-y-10 min-w-0">
-                    {/* Arabic Text */}
+                    {/* Arabic Text rendered word by word with High-Fidelity fonts */}
                     <div
-                        className="text-right leading-[2.2] !text-black tajweed break-words"
-                        style={{ fontFamily: 'UthmanicHafs, serif', fontSize: 'var(--quran-font-size)' }}
+                        className="text-right leading-[2.2] !text-black flex flex-wrap flex-row justify-start gap-x-2 gap-y-4"
                         dir="rtl"
                         lang="ar"
-                        dangerouslySetInnerHTML={{ __html: tajweed }}
-                    />
+                    >
+                        {(verse.words || []).map(w => {
+                            const page = w.page_number;
+                            const content = w.code_v2 || w.text_qpc_hafs || w.text_uthmani || "";
+                            
+                            return (
+                                <span
+                                    key={w.id}
+                                    style={{ 
+                                        fontFamily: `'quran-font-v2-${page}-${showTajweed ? 'tajweed' : 'plain'}', UthmanicHafs, serif`, 
+                                        fontSize: 'var(--quran-font-size-translation)'
+                                    }}
+                                    dangerouslySetInnerHTML={{ __html: content }}
+                                />
+                            );
+                        })}
+                    </div>
 
                     {/* Translation */}
                     {mainTranslation && (
