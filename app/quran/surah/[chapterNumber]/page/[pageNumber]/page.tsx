@@ -119,7 +119,7 @@ export default async function SurahMushafPage({
           <QcfMushafLines
             pageNumber={page}
             verses={pageVerses}
-            tajweedColors={tajweedColors}
+            showTajweed={tajweedColors}
             chapters={chapters}
           />
         </div>

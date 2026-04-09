@@ -110,40 +110,26 @@ body {
   direction: rtl;
 }
 
-.qcf-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  align-items: stretch;
+/* Fluid Mushaf styles for high-fidelity inline rendering */
+.mushaf-fluid-page {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-.qcf-line {
-  width: 100% !important;
-  direction: rtl;
-  font-size: var(--quran-font-size);
-  line-height: 2.15;
-  min-height: 2.15em;
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  /* Statically forces one line per Mushaf line record */
-  justify-content: space-between !important;
-  /* Justifies text across the container */
-  align-items: center;
-}
-
-
-.qcf-word {
-  display: inline-block;
+.qcf-word, .qcf-end-mushaf {
+  display: inline;
+  white-space: normal;
 }
 
 .qcf-end-mushaf {
-  display: inline-block;
-  margin-inline: 0.15em;
   opacity: 0.85;
-  font-size: 1em;
-  min-width: 0.9em;
-  vertical-align: middle;
-  line-height: 2;
+  transition: opacity 0.3s;
+}
+
+.qcf-end-mushaf:hover {
+  opacity: 1;
 }
 
 .qcf-end-vbv {
