@@ -106,7 +106,7 @@ export function MushafView({
                                 <React.Fragment key={lineNumber}>
                                     {isNewSurahStart && currentChapter && currentChapter.id !== 1 && currentChapter.id !== 9 && (
                                         <div className="mt-6 mb-10 w-full flex justify-center">
-                                            <Bismillah />
+                                            <Bismillah fontFamily={`'quran-font-v2-${page}-${showTajweed ? 'tajweed' : 'plain'}', UthmanicHafs, serif`} />
                                         </div>
                                     )}
                                     <div

@@ -72,7 +72,7 @@ export default function Home() {
           <motion.div
             variants={container}
             initial="hidden"
-            animate="show"
+            animate="show" 
             className="flex flex-col gap-4"
           >
             {categories.map((cat) => {

@@ -47,7 +47,7 @@ export function QcfMushafLines({
                 <SurahHeader chapter={chapter} />
                 {chapter.id !== 1 && chapter.id !== 9 && (
                   <span className="mt-4 block">
-                    <Bismillah />
+                    <Bismillah fontFamily={`'quran-font-v2-${pageNumber}-${showTajweed ? 'tajweed' : 'plain'}', UthmanicHafs, serif`} />
                   </span>
                 )}
               </span>
