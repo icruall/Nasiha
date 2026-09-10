@@ -54,10 +54,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${amiri.variable} ${playfair.variable} antialiased selection:bg-sky-500/30`}
+        className={`${geistSans.variable} ${geistMono.variable} ${amiri.variable} ${playfair.variable} antialiased selection:bg-emerald-500/25 selection:text-emerald-100`}
       >
         <NextTopLoader 
-          color="#eab308" 
+          color="#c5a059" 
           initialPosition={0.08} 
           crawlSpeed={200} 
           height={3} 
@@ -65,7 +65,7 @@ export default function RootLayout({
           showSpinner={false} 
           easing="ease" 
           speed={200} 
-          shadow="0 0 10px #eab308,0 0 5px #eab308"
+          shadow="0 0 10px #c5a059,0 0 5px #c5a059"
         />
         <div className="living-background" aria-hidden="true" />
         <QuranProvider>

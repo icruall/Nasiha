@@ -6,15 +6,15 @@ export default function BreathingOrb() {
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10">
       <motion.div
         animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.15, 0.25, 0.15],
+          scale: [1, 1.15, 1],
+          opacity: [0.06, 0.12, 0.06],
         }}
         transition={{
-          duration: 8,
+          duration: 16,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-sky-500/20 rounded-full blur-[80px] md:blur-[120px]"
+        className="w-[320px] h-[320px] md:w-[540px] md:h-[540px] bg-gradient-to-tr from-emerald-500/15 via-emerald-600/10 to-amber-500/10 rounded-full blur-[100px] md:blur-[140px]"
       />
     </div>
   )
